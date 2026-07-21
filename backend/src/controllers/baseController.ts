@@ -3,8 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import { logger } from '../config/logger';
 import { logAudit } from '../utils/auditLogger';
 import { AuthRequest } from '../middlewares/authMiddleware';
-
-const prisma = new PrismaClient();
+import prisma from '../config/prisma';
 
 export const getBases = async (req: AuthRequest, res: Response) => {
   try {

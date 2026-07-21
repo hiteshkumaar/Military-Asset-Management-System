@@ -2,8 +2,7 @@ import { Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { logger } from '../config/logger';
 import { AuthRequest } from '../middlewares/authMiddleware';
-
-const prisma = new PrismaClient();
+import prisma from '../config/prisma';
 
 export const getInventory = async (req: AuthRequest, res: Response) => {
   try {

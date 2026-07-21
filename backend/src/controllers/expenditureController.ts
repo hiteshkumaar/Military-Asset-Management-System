@@ -1,11 +1,9 @@
 import { Response } from 'express';
-import { PrismaClient } from '@prisma/client';
 import { logger } from '../config/logger';
 import { logAudit } from '../utils/auditLogger';
 import { AuthRequest } from '../middlewares/authMiddleware';
 import { updateInventory } from '../services/inventoryService';
-
-const prisma = new PrismaClient();
+import prisma from '../config/prisma';
 
 export const createExpenditure = async (req: AuthRequest, res: Response) => {
   try {

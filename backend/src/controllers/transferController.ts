@@ -4,8 +4,7 @@ import { logger } from '../config/logger';
 import { logAudit } from '../utils/auditLogger';
 import { AuthRequest } from '../middlewares/authMiddleware';
 import { updateInventory } from '../services/inventoryService';
-
-const prisma = new PrismaClient();
+import prisma from '../config/prisma';
 
 export const createTransfer = async (req: AuthRequest, res: Response) => {
   try {
