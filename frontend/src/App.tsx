@@ -25,7 +25,11 @@ function App() {
             <Route path="/transfers" element={<Transfers />} />
             <Route path="/assignments" element={<Assignments />} />
             <Route path="/expenditures" element={<Expenditures />} />
-            <Route path="/audit-logs" element={<AuditLogs />} />
+            
+            {/* Admin Only Routes */}
+            <Route element={<ProtectedRoute allowedRoles={['Admin']} />}>
+              <Route path="/audit-logs" element={<AuditLogs />} />
+            </Route>
           </Route>
         </Route>
         
