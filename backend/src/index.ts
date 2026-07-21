@@ -14,6 +14,7 @@ import assignmentRoutes from './routes/assignmentRoutes';
 import expenditureRoutes from './routes/expenditureRoutes';
 import inventoryRoutes from './routes/inventoryRoutes';
 import dashboardRoutes from './routes/dashboardRoutes';
+import { setupSwagger } from './config/swagger';
 
 dotenv.config();
 
@@ -30,6 +31,9 @@ app.use(morgan('combined', { stream: { write: (message) => logger.info(message.t
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
+
+// Setup Swagger API Documentation
+setupSwagger(app);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/bases', baseRoutes);
