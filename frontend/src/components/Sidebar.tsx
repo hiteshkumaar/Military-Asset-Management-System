@@ -78,8 +78,10 @@ const Sidebar = () => {
             <ListItemText 
               primary={item.text} 
               primaryTypographyProps={{ 
-                fontWeight: location.pathname === item.path ? 'bold' : 'normal',
-                color: location.pathname === item.path ? 'primary.main' : 'inherit'
+                sx: {
+                  fontWeight: location.pathname === item.path ? 'bold' : 'normal',
+                  color: location.pathname === item.path ? 'primary.main' : 'inherit'
+                }
               }} 
             />
             </ListItemButton>
