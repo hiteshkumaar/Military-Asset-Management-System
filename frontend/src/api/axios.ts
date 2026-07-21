@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:5000/api', // Adjust base URL as needed for deployment
+  baseURL: import.meta.env.VITE_API_URL || 'https://military-asset-management-system-uhkl.onrender.com/api', 
 });
 
 instance.interceptors.request.use(
