@@ -22,7 +22,7 @@ const AuditLogs = () => {
 
   return (
     <Box>
-      <Typography variant="h4" fontWeight="bold" gutterBottom color="primary">
+      <Typography variant="h4" sx={{ fontWeight: 'bold' }} gutterBottom color="primary">
         System Audit Logs
       </Typography>
       <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>

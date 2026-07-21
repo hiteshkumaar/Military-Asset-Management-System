@@ -46,14 +46,14 @@ const Sidebar = () => {
       }}
     >
       <Box sx={{ p: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Typography variant="h6" fontWeight="bold" color="primary">
+        <Typography variant="h6" sx={{ fontWeight: 'bold' }} color="primary">
           MAMS PORTAL
         </Typography>
       </Box>
       <Divider sx={{ borderColor: '#333' }} />
       <Box sx={{ p: 2 }}>
         <Typography variant="body2" color="text.secondary">Logged in as:</Typography>
-        <Typography variant="body1" fontWeight="bold">{user?.role}</Typography>
+        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{user?.role}</Typography>
       </Box>
       <Divider sx={{ borderColor: '#333' }} />
       <List sx={{ flexGrow: 1, pt: 2 }}>

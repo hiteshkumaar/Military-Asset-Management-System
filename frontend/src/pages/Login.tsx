@@ -36,7 +36,7 @@ const Login = () => {
       backgroundColor: 'background.default'
     }}>
       <Paper elevation={6} sx={{ p: 5, width: 400, borderRadius: 3 }}>
-        <Typography variant="h4" fontWeight="bold" gutterBottom color="primary">
+        <Typography variant="h4" sx={{ fontWeight: 'bold' }} gutterBottom color="primary">
           MAMS Portal
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>

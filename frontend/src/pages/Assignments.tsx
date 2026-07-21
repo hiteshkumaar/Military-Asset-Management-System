@@ -22,7 +22,7 @@ const Assignments = () => {
 
   return (
     <Box>
-      <Typography variant="h4" fontWeight="bold" gutterBottom color="primary">
+      <Typography variant="h4" sx={{ fontWeight: 'bold' }} gutterBottom color="primary">
         Personnel Assignments
       </Typography>
       

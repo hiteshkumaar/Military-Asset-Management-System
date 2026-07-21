@@ -39,7 +39,7 @@ const Dashboard = () => {
 
   return (
     <Box sx={{ flexGrow: 1, p: 3 }}>
-      <Typography variant="h4" fontWeight="bold" gutterBottom>
+      <Typography variant="h4" sx={{ fontWeight: 'bold' }} gutterBottom>
         Tactical Dashboard
       </Typography>
 
