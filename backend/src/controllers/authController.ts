@@ -7,6 +7,7 @@ import { logger } from '../config/logger';
 const prisma = new PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 
+
 export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
@@ -47,6 +48,19 @@ export const login = async (req: Request, res: Response) => {
     });
   } catch (error) {
     logger.error('Login error', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+export const getAuditLogs = async (req: Request, res: Response) => {
+  try {
+    const logs = await prisma.auditLog.findMany({
+      orderBy: { timestamp: 'desc' },
+      take: 100 // Limit to 100 recent logs
+    });
+    return res.json(logs);
+  } catch (error) {
+    logger.error('Error fetching audit logs', error);
     return res.status(500).json({ message: 'Internal server error' });
   }
 };

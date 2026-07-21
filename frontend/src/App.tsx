@@ -1,7 +1,14 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Inventory from './pages/Inventory';
+import Purchases from './pages/Purchases';
+import Transfers from './pages/Transfers';
+import Assignments from './pages/Assignments';
+import Expenditures from './pages/Expenditures';
+import AuditLogs from './pages/AuditLogs';
 import ProtectedRoute from './components/ProtectedRoute';
+import Layout from './components/Layout';
 
 function App() {
   return (
@@ -11,8 +18,15 @@ function App() {
         
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<Dashboard />} />
-          {/* We will add Inventory, Purchases, etc. here in Phase 5 */}
+          <Route element={<Layout />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/inventory" element={<Inventory />} />
+            <Route path="/purchases" element={<Purchases />} />
+            <Route path="/transfers" element={<Transfers />} />
+            <Route path="/assignments" element={<Assignments />} />
+            <Route path="/expenditures" element={<Expenditures />} />
+            <Route path="/audit-logs" element={<AuditLogs />} />
+          </Route>
         </Route>
         
         {/* Fallback */}
