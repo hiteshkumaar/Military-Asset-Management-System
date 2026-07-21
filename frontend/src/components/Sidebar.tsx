@@ -1,4 +1,4 @@
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, Box, Typography, Divider, Button } from '@mui/material';
+import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box, Typography, Divider, Button } from '@mui/material';
 import { Dashboard, Inventory, ShoppingCart, SwapHoriz, AssignmentTurnedIn, Output, ExitToApp, Security } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -58,10 +58,9 @@ const Sidebar = () => {
       <Divider sx={{ borderColor: '#333' }} />
       <List sx={{ flexGrow: 1, pt: 2 }}>
         {menuItems.map((item) => (
-          <ListItem 
-            button 
-            key={item.text} 
-            onClick={() => navigate(item.path)}
+          <ListItem disablePadding key={item.text} sx={{ mb: 1, mx: 1, display: 'block' }}>
+            <ListItemButton 
+              onClick={() => navigate(item.path)}
             sx={{
               backgroundColor: location.pathname === item.path ? 'rgba(76, 175, 80, 0.15)' : 'transparent',
               borderRight: location.pathname === item.path ? '4px solid #4caf50' : 'none',
@@ -83,6 +82,7 @@ const Sidebar = () => {
                 color: location.pathname === item.path ? 'primary.main' : 'inherit'
               }} 
             />
+            </ListItemButton>
           </ListItem>
         ))}
       </List>
