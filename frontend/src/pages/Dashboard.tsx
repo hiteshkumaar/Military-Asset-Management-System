@@ -23,7 +23,7 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center" height="80vh">
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
         <CircularProgress color="primary" />
       </Box>
     );
@@ -44,7 +44,7 @@ const Dashboard = () => {
       </Typography>
 
       <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid item xs={12} md={4}>
+        <Grid xs={12} md={4}>
           <Card elevation={3}>
             <CardContent>
               <Typography color="text.secondary" gutterBottom>Opening Balance</Typography>
@@ -52,7 +52,7 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid xs={12} md={4}>
           <Card elevation={3}>
             <CardContent>
               <Typography color="text.secondary" gutterBottom>Closing Balance</Typography>
@@ -60,7 +60,7 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid xs={12} md={4}>
           <Card elevation={3}>
             <CardContent>
               <Typography color="text.secondary" gutterBottom>Net Movement</Typography>
