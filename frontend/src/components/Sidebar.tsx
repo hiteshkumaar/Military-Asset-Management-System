@@ -2,7 +2,7 @@ import { Drawer, List, ListItem, ListItemIcon, ListItemText, Box, Typography, Di
 import { Dashboard, Inventory, ShoppingCart, SwapHoriz, AssignmentTurnedIn, Output, ExitToApp, Security } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store';
+import type { RootState } from '../store';
 import { logout } from '../store/authSlice';
 
 const drawerWidth = 260;
