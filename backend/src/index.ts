@@ -13,6 +13,7 @@ import transferRoutes from './routes/transferRoutes';
 import assignmentRoutes from './routes/assignmentRoutes';
 import expenditureRoutes from './routes/expenditureRoutes';
 import inventoryRoutes from './routes/inventoryRoutes';
+import dashboardRoutes from './routes/dashboardRoutes';
 
 dotenv.config();
 
@@ -38,6 +39,7 @@ app.use('/api/transfers', transferRoutes);
 app.use('/api/assignments', assignmentRoutes);
 app.use('/api/expenditures', expenditureRoutes);
 app.use('/api/inventory', inventoryRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 app.listen(PORT, () => {
   logger.info(`Server is running on port ${PORT}`);
