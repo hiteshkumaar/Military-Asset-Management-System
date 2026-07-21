@@ -1,0 +1,157 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Role {
+  id    Int    @id @default(autoincrement())
+  name  String @unique // Admin, Base Commander, Logistics Officer
+  users User[]
+}
+
+model Base {
+  id           Int           @id @default(autoincrement())
+  name         String        @unique
+  location     String
+  createdAt    DateTime      @default(now())
+  users        User[]
+  inventories  Inventory[]
+  purchases    Purchase[]
+  transfersOut Transfer[]    @relation("FromBase")
+  transfersIn  Transfer[]    @relation("ToBase")
+  expenditures Expenditure[]
+}
+
+model User {
+  id           Int          @id @default(autoincrement())
+  email        String       @unique
+  passwordHash String
+  createdAt    DateTime     @default(now())
+  
+  roleId       Int
+  role         Role         @relation(fields: [roleId], references: [id])
+  
+  baseId       Int?
+  base         Base?        @relation(fields: [baseId], references: [id])
+
+  auditLogs    AuditLog[]
+}
+
+model EquipmentCategory {
+  id          Int         @id @default(autoincrement())
+  name        String      @unique // Weapons, Vehicles, Ammunition, Equipment
+  equipments  Equipment[]
+}
+
+model Equipment {
+  id          Int               @id @default(autoincrement())
+  name        String
+  description String?
+  categoryId  Int
+  category    EquipmentCategory @relation(fields: [categoryId], references: [id])
+
+  inventories  Inventory[]
+  purchases    Purchase[]
+  transfers    Transfer[]
+  assignments  Assignment[]
+  expenditures Expenditure[]
+}
+
+model Inventory {
+  id             Int       @id @default(autoincrement())
+  baseId         Int
+  base           Base      @relation(fields: [baseId], references: [id])
+  
+  equipmentId    Int
+  equipment      Equipment @relation(fields: [equipmentId], references: [id])
+  
+  quantity       Int       @default(0)
+  openingBalance Int       @default(0)
+  closingBalance Int       @default(0)
+  lastUpdated    DateTime  @updatedAt
+
+  @@unique([baseId, equipmentId])
+}
+
+model Purchase {
+  id          Int       @id @default(autoincrement())
+  date        DateTime  @default(now())
+  
+  baseId      Int
+  base        Base      @relation(fields: [baseId], references: [id])
+  
+  equipmentId Int
+  equipment   Equipment @relation(fields: [equipmentId], references: [id])
+  
+  quantity    Int
+  remarks     String?
+  createdBy   Int
+}
+
+model Transfer {
+  id          Int       @id @default(autoincrement())
+  date        DateTime  @default(now())
+  
+  fromBaseId  Int
+  fromBase    Base      @relation("FromBase", fields: [fromBaseId], references: [id])
+  
+  toBaseId    Int
+  toBase      Base      @relation("ToBase", fields: [toBaseId], references: [id])
+  
+  equipmentId Int
+  equipment   Equipment @relation(fields: [equipmentId], references: [id])
+  
+  quantity    Int
+  remarks     String?
+  status      String    @default("PENDING") // PENDING, APPROVED, REJECTED
+  createdBy   Int
+  approvedBy  Int?
+}
+
+model Assignment {
+  id            Int       @id @default(autoincrement())
+  date          DateTime  @default(now())
+  personnelName String
+  rank          String
+  unit          String
+  
+  equipmentId   Int
+  equipment     Equipment @relation(fields: [equipmentId], references: [id])
+  
+  quantity      Int
+  status        String    @default("ASSIGNED") // ASSIGNED, RETURNED
+  createdBy     Int
+}
+
+model Expenditure {
+  id          Int       @id @default(autoincrement())
+  date        DateTime  @default(now())
+  
+  baseId      Int
+  base        Base      @relation(fields: [baseId], references: [id])
+  
+  equipmentId Int
+  equipment   Equipment @relation(fields: [equipmentId], references: [id])
+  
+  quantity    Int
+  reason      String
+  createdBy   Int
+}
+
+model AuditLog {
+  id         Int      @id @default(autoincrement())
+  timestamp  DateTime @default(now())
+  
+  userId     Int?
+  user       User?    @relation(fields: [userId], references: [id])
+  
+  action     String   // CREATE, UPDATE, DELETE
+  resource   String   // Table name
+  prevValues String?  @db.Text // JSON string
+  newValues  String?  @db.Text // JSON string
+  ipAddress  String?
+  endpoint   String?
+}
