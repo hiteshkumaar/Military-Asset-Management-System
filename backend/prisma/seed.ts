@@ -36,16 +36,24 @@ async function main() {
 
   const adminUser = await prisma.user.upsert({
     where: { email: adminEmail },
-    update: {
-      passwordHash: passwordHash, // Ensure password is correct
-    },
-    create: {
-      email: adminEmail,
-      passwordHash: passwordHash,
-      roleId: createdRoles['Admin'],
-      baseId: baseAlpha.id,
-    },
+    update: { passwordHash: passwordHash },
+    create: { email: adminEmail, passwordHash: passwordHash, roleId: createdRoles['Admin'], baseId: baseAlpha.id },
   });
+
+  const logisticsEmail = 'logistics@mams.mil';
+  await prisma.user.upsert({
+    where: { email: logisticsEmail },
+    update: { passwordHash: passwordHash },
+    create: { email: logisticsEmail, passwordHash: passwordHash, roleId: createdRoles['Logistics Officer'], baseId: baseAlpha.id },
+  });
+
+  const commanderEmail = 'commander@mams.mil';
+  await prisma.user.upsert({
+    where: { email: commanderEmail },
+    update: { passwordHash: passwordHash },
+    create: { email: commanderEmail, passwordHash: passwordHash, roleId: createdRoles['Base Commander'], baseId: baseAlpha.id },
+  });
+
   console.log('Users seeded.');
 
   // 4. Equipment Categories & Equipment
@@ -152,6 +160,10 @@ async function main() {
   console.log('--------------------------------------------------');
   console.log('Here are your Login Credentials:');
   console.log(`Email: ${adminEmail}`);
+  console.log(`Password: ${adminPassword}`);
+  console.log(`\nEmail: logistics@mams.mil`);
+  console.log(`Password: ${adminPassword}`);
+  console.log(`\nEmail: commander@mams.mil`);
   console.log(`Password: ${adminPassword}`);
   console.log('--------------------------------------------------');
 }
